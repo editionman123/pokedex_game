@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Título de la página</title>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Cache-control" content="public">
+        <title>Título de la página</title>
+    </head>
+    <body>
+         
+    </body>
+    </html>
+</body>
+</html><!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <script src="https://cdn.socket.io/3.1.1/socket.io.min.js"></script>
+    <!--Normalize-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--Css Global-->
+    <link rel="stylesheet" href="assets/css/global.css">
+    <!--Css Pokedex-->
+    <link rel="stylesheet" href="assets/css/pokedex.css">
+    <!--Fonte Roboto-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <section class="frame" id="ux_ui">
+        <div class="content_ui">
+            <div class="slot">
+                sjhshdhhd
+            </div>
+            <div class="slot">
+                sjhshdhhd
+            </div>
+        </div>
+    </section>
+    <section class="frame" id="ux_frame">
+        <!--*frame de detalles de monster id*/-->
+        <section class="frame_box Off" id="frame_monster">
+            <button onclick="close_details()" class="circle_btn" type="button">X</button>
+            <ol class="content_boxs" id="content_boxs"></ol>
+            
+        </section>
+        
+        <!--/*frame principal de pokedex*/-->
+        <section class="frame_box on_static" id="frame_pokedex">
+            <button class="warning_btn" type="button">close</button>
+        <select name="select_gen" id="select_gen">
+            <option selected value="1">1st Gen</option>
+            <option value="2">2nd Gen</option>
+            <option value="3">3rd Gen</option>
+            <option value="4">4th Gen</option>
+            <option value="5">5th Gen</option>
+            <option value="6">6th Gen</option>
+            <option value="7">7th Gen</option>
+            <option value="8">8th Gen</option>
+            <option value="9">9th Gen</option>
+        </select>
+        
+        
+            
+            <ol class="content_slots" id="pokedex_slots">
+                
+            </ol>
+            
+            <div class="pagination">
+                <button id="loadMoreButton" type="button">Load More</button>
+            </div>
+        </section>
+        
+        
+    </section>
+    
+</body>
+<!-- JS -->
+<script src="assets/js/pokemon-model.js"></script>
+<script src="assets/js/poke-api.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="monsters.js"></script>
+<script src="test.js"></script>
+
+
+</html>
