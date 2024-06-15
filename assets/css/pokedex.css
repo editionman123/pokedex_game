@@ -77,7 +77,6 @@ img{
     padding: 0rem;
     z-index: 1;
     user-select: none;
-  pointer-events: none;
 }
 slot:hover{
     border: 1rem black solid;
