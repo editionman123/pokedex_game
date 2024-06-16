@@ -41,10 +41,10 @@
     <section class="frame" id="ux_ui">
         <div class="content_ui">
             <div class="slot">
-                sjhshdhhd
+                Pokedex
             </div>
             <div class="slot">
-                sjhshdhhd
+                Items
             </div>
         </div>
     </section>
@@ -52,13 +52,13 @@
         <!--*frame de detalles de monster id*/-->
         <section class="frame_box Off" id="frame_monster">
             <button onclick="close_details()" class="circle_btn" type="button">X</button>
-            <ol class="content_boxs" id="content_boxs"></ol>
+            <ol class="content_monster" id="content_monster"></ol>
             
         </section>
         
         <!--/*frame principal de pokedex*/-->
         <section class="frame_box on_static" id="frame_pokedex">
-            <button class="warning_btn" type="button">close</button>
+            <button onclick="toggle_frame(false,'frame_pokedex')" class="warning_btn" type="button">close</button>
         <select name="select_gen" id="select_gen">
             <option selected value="1">1st Gen</option>
             <option value="2">2nd Gen</option>
@@ -70,18 +70,45 @@
             <option value="8">8th Gen</option>
             <option value="9">9th Gen</option>
         </select>
-        
-        
-            
             <ol class="content_slots" id="pokedex_slots">
                 
             </ol>
             
             <div class="pagination">
-                <button id="loadMoreButton" type="button">Load More</button>
+                <button id="load_mons" type="button">Load More</button>
             </div>
         </section>
+
+
+
+        <!--*frame de detalles de item id*/-->
+        <section class="frame_box Off" id="frame_monster">
+            <button onclick="close_details()" class="circle_btn" type="button">X</button>
+            <ol class="content_item" id="content_item"></ol>
+            
+        </section>
+
+        <!--/*frame principal de items*/-->
+        <section class="frame_box Off" id="frame_itemdex">
+            <button onclick="toggle_frame(false,'frame_itemdex')" class="warning_btn" type="button">close</button>
+        <select name="select_item" id="select_item">
+            <option selected value="ball">Balls</option>
+            <option value="battle">Battle</option>
+            <option value="3">3rd Gen</option>
+            <option value="4">4th Gen</option>
+            <option value="5">5th Gen</option>
+            <option value="6">6th Gen</option>
+            <option value="7">7th Gen</option>
+            <option value="8">8th Gen</option>
+            <option value="9">9th Gen</option>
+        </select>
+        <ol class="itemdex_slots" id="itemdex_slots">
+                
+        </ol>
         
+        <div class="pagination">
+            <button id="load_items" type="button">Load More</button>
+        </div>
         
     </section>
     

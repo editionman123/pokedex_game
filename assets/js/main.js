@@ -1,27 +1,34 @@
 var test;
-const loadMoreButton = document.getElementById('loadMoreButton')
-const selectGen = document.getElementById('select_gen')
-const limit = 20;
-const maxRecords = {"gen_1": 152-1, "gen_2": 252-152, "gen_3": 387-252, "gen_4":494-387,"gen_5":650-494,"gen_6":722-650,"gen_7":810-722,"gen_8":906-810,"gen_9":1011-906};
-let countRecords = 0
-const generations = {"1": 1, "2": 101, "3": 3, "4":4, "5":5,"6":6,"7":7,"8":8,"9":9};
-var gen=1;
-let offset = 0;
-var pokedex={};
-var p_monsters=document.getElementById("frame_pokedex");
-const pokelist = document.getElementById('pokedex_slots');
-var p_details=document.getElementById("frame_monster");
-var detlist = document.getElementById('content_boxs');
+
 var action=false;
-var url_img2="https://raw.githubusercontent.com/editionman123/pokedex_v3/master/assets/img/pokemons/poke_";
 var qualitys={1:"low",2:"mid",3:"monsters"};
-
-/*
-https://raw.githubusercontent.com/editionman123/pokemon/main/monsters/101/skin/start/0/1.gif
-*/
-
 var url_img='https://raw.githubusercontent.com/editionman123/pokemon/main/'+qualitys[3]+'/';
-var url_img_o='/storage/emulated/0/Download/github-pokemon/'+qualitys[3]+'/';
+
+//POKEDEX
+var pokedex={};
+let index_pokedex = 0;
+const load_pokedex = document.getElementById('load_mons');
+const select_generation = document.getElementById('select_gen');
+
+var f_pokedex=document.getElementById("frame_pokedex");
+const pokedex_list = document.getElementById('pokedex_slots');
+
+var f_monster=document.getElementById("frame_monster");
+var monster_list = document.getElementById('content_monster');
+//ITEMS
+var itemdex={};
+let index_itemdex = 0;
+const load_itemdex = document.getElementById('load_items');
+const select_item = document.getElementById('select_item');
+
+var f_itemdex=document.getElementById("frame_pokedex");
+const itemdex_list = document.getElementById('itemdex_slots');
+
+var f_item=document.getElementById("frame_item");
+var item_list = document.getElementById('content_item');
+
+
+//-------------------
 var types={
     0:"",
     1:"Steel",
@@ -42,6 +49,7 @@ var types={
     16:"Ground",
     17:"Poison",
     18:"Flying",
+    19:"Astral",
 };
 var colors={
     0:"",
@@ -66,7 +74,7 @@ var colors={
 };
 
 var socket=null;
-var test;
+
 function connect_socket(host) {
 	try{
 		socket = io.connect(host,{transports:['websocket']});
@@ -91,36 +99,30 @@ function socket_reciver(){
 		//i,"start",0
 		Object.keys(data.monsters).forEach(i=>{
 		    let card=slot_monster_html(i,data.monsters[i]);
-		    pokelist.appendChild(card);
+		    pokedex_list.appendChild(card);
 		});
-		offset=data.index;
+		index_pokedex=data.index;
 	});
 }
 connect_socket("https://pokemonuniverse-privado.glitch.me/");
 
 
 
-function loadPokemonItens(offset, limit, gen) {
-    socket.emit("pokedex",{index:offset,qty:limit,gen:gen});
+function loadPokemonItens(i, gen) {
+    socket.emit("pokedex",{index:i,gen:gen});
     switcher_details(false);
 }
 
-loadPokemonItens(offset, limit,gen);
+loadPokemonItens(index_pokedex,parseInt(select_generation.value));
 
 
-loadMoreButton.addEventListener('click', () => {
-loadPokemonItens(offset, limit, gen);
+load_pokedex.addEventListener('click', () => {
+loadPokemonItens(index_pokedex, parseInt(select_generation.value));
 })
 
-selectGen.addEventListener('change', () => {
-    //console.log(selectGen.value)
-    pokelist.innerHTML = '';
-    countRecords = 0
-    offset = generations[selectGen.value]
-    gen=parseInt(selectGen.value);
-    
-    socket.emit("pokedex_gen",{index:0,qty:limit,gen:gen});
-    //loadPokemonItens(offset, limit, gen)
+select_generation.addEventListener('change', () => {
+    pokedex_list.innerHTML = '';    
+    socket.emit("pokedex_gen",{gen:parseInt(select_generation.value)});
 })
 
 
@@ -128,7 +130,7 @@ function openbox_skin(id,skin_name,skin_id,special=0){
     if(!action)return;//no se ejecuta
     //console.log(id,skin_name,skin_id);
     // 
-    detlist.innerHTML="";
+    monster_list.innerHTML="";
     
     if(!pokedex[id]){//
         return socket.emit("pokedex_id",{id:id,skin:skin_name,index:skin_id});
@@ -144,7 +146,7 @@ function openbox_battleskin(id,skin_name,skin_id,special=0){
     if(!action)return;//no se ejecuta
     //console.log(id,skin_name,skin_id);
     // 
-    detlist.innerHTML="";
+    monster_list.innerHTML="";
     
     if(!pokedex[id]){//
         return socket.emit("pokedex_id",{id:id,skin:skin_name,index:skin_id});
@@ -375,15 +377,15 @@ function box_monsters_html(id,skin_name,skin_id,special,type){
     let battleskin=box_battleskins_html(id,monster.battle_skin);
     
     
-    detlist.appendChild(btnNext);
-    detlist.appendChild(btnPrev);
+    monster_list.appendChild(btnNext);
+    monster_list.appendChild(btnPrev);
     
-    detlist.appendChild(header);
-    detlist.appendChild(stats);
-    detlist.appendChild(evos);
-    detlist.appendChild(shapes);
-    detlist.appendChild(specials);
-    detlist.appendChild(battleskin);
+    monster_list.appendChild(header);
+    monster_list.appendChild(stats);
+    monster_list.appendChild(evos);
+    monster_list.appendChild(shapes);
+    monster_list.appendChild(specials);
+    monster_list.appendChild(battleskin);
 }
 
 
@@ -827,42 +829,51 @@ function type_bg(type1,type2){
 
 
 function next_qlty(qlty){//1:low-2:mid-3:monsters
-if(!qualitys[qlty])qlty=1; url_img='https://raw.githubusercontent.com/editionman123/pokemon/main/'+qualitys[qlty]+'/';
-   console.log(url_img);
-   /*reload slots*/
-   //delete slots and volver a cargarlos
-   //reiniciando los contadores de pokedex
-   //se copio del change generation method
-   pokelist.innerHTML = '';
-    countRecords = 0
-    offset = generations[selectGen.value]
-    loadPokemonItens(offset, limit)
+    if(!qualitys[qlty])qlty=1; url_img='https://raw.githubusercontent.com/editionman123/pokemon/main/'+qualitys[qlty]+'/';
+    pokedex_list.innerHTML = '';
+    socket.emit("pokedex_gen",{gen:parseInt(select_generation.value)});
 }
 
 function close_details(){
     if(!action)return;
     switcher_details(false);
 }
-
+function toggle_frame(bool,frame){
+    action=false;
+    let f=document.getElementById(frame);
+    if(!bool){
+        f.classList.remove("On");
+        f.classList.remove("on_static");
+        f.classList.add("Off");
+    }else{
+        f.classList.remove("Off");
+        f.classList.remove("off_static");
+        f.classList.add("On");
+    }
+    
+    setTimeout(()=>{
+        action=true;
+     },3000);
+}
 
 function switcher_details(bool){
     if(bool){
         action=false;
-        p_details.classList.remove("Off");
-        p_details.classList.add("On");
-        p_monsters.classList.remove("on_static");
-p_monsters.classList.add("off_static");
+        f_monster.classList.remove("Off");
+        f_monster.classList.add("On");
+        f_pokedex.classList.remove("on_static");
+f_pokedex.classList.add("off_static");
         setTimeout(()=>{
-           action=true; p_details.classList.remove("On"); p_details.classList.add("on_static"); p_monsters.classList.remove("off_static");
-p_monsters.classList.add("Off");
+           action=true; f_monster.classList.remove("On"); f_monster.classList.add("on_static"); f_pokedex.classList.remove("off_static");
+f_pokedex.classList.add("Off");
         },300);
         
     }else{
-       action=false;                 p_details.classList.remove("on_static");         p_details.classList.add("off_static"); p_monsters.classList.remove("Off");
-p_monsters.classList.add("On");
+       action=false;                 f_monster.classList.remove("on_static");         f_monster.classList.add("off_static"); f_pokedex.classList.remove("Off");
+f_pokedex.classList.add("On");
         setTimeout(()=>{
-            action=true;         p_details.classList.remove("off_static"); p_details.classList.add("Off"); p_monsters.classList.remove("On");
-p_monsters.classList.add("on_static");
+            action=true;         f_monster.classList.remove("off_static"); f_monster.classList.add("Off"); f_pokedex.classList.remove("On");
+f_pokedex.classList.add("on_static");
         },300);
     }
 }

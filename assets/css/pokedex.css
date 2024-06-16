@@ -66,17 +66,16 @@ img{
       /*border:3px black solid;*/
   }
   .slot {
-      /*overflow: hidden;*/
-      
-      position: relative;
-      display:flex;
-      justify-content:center;
-      perspective:2500px;
-      height: 100px;
-      margin: 0.2rem;
-      padding: 0rem;
-      z-index: 1;
-      user-select: none;
+          /* overflow: hidden; */
+    /* position: relative; */
+    /* display: flex; */
+    /* justify-content: center; */
+    perspective: 2500px;
+    height: 100px;
+    margin: 0.2rem;
+    /* padding: 0rem; */
+    z-index: 1;
+    /* user-select: none;*/
   }
   slot:hover{
       border: 1rem black solid;
@@ -677,14 +676,6 @@ img{
       .row_full{
           grid-column:1/3;
       }
-      /*
-      .row_midl{
-          grid-column:1/3;
-      }
-      .row_midr{
-          grid-column:1/3;
-      }
-      */
       .imgevo {
         max-width: 110%;
         max-height: 110%;

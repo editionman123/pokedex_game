@@ -83,16 +83,16 @@
 
 
 .circle_btn{
-    position: fixed;
+    position: absolute;
     color:white;
     background-color:red;
-    right:5%;
-    top:2.5%;
+    right:0rem;
+    top:0rem;
     border-radius:50%;
     z-index:1000;
     border:0.1rem black solid;
     font-weight: bold;
-    font-size:1rem;
+    font-size:2rem;
     padding:1rem;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     cursor: pointer;
