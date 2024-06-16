@@ -107,10 +107,10 @@ slot:hover{
     transform: rotate(-45deg) !important;
 }
 .slot:hover .div_3d{
-      visibility:visible;
       z-index: 10;
 }
 .slot:hover .img3d{
+    visibility:visible;
       opacity:1;
       max-height:120%;
       max-width:120%;
@@ -170,10 +170,10 @@ slot:hover{
     filter: brightness(0%) saturate(0%) blur(2px);
 }
 .box3d:hover .div_3d{
-    visibility:visible;
     z-index: 10;
 }
 .box3d:hover .box_img3d{
+    visibility:visible;
     opacity:1;
     max-height:120%;
     max-width:120%;
@@ -236,6 +236,7 @@ slot:hover{
       max-height:100%;
   }
 .box_img3d{
+    visibility:hidden;
     opacity:0;
     transition: all 0.5s;
     
@@ -271,8 +272,6 @@ slot:hover{
   }
   div_3d {
   /*border:2px blue solid;*/
-      
-      visibility:hidden;
       width:100%;
       height:100%;
       position: absolute;
@@ -329,6 +328,7 @@ slot:hover{
       
   }
   .img3d{
+    visibility:hidden;
     opacity:0;
   transition: all 0.5s;
   
