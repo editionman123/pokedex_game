@@ -728,7 +728,7 @@ img{
           grid-column:3/5;
       }
       .imgevo {
-        max-width: 150%;
-        max-height: 150%;
+        max-width: 120%;
+        max-height: 120%;
       }
   }
