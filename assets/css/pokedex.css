@@ -34,7 +34,7 @@ img{
   
   
   
-  .content_slots {
+.obj_slots {
       
       display: grid;
       grid-template-columns: 1fr;
@@ -44,8 +44,8 @@ img{
       
       /*gap:0.5rem;*/
       /*border:3px black solid;*/
-  }
-  .content_boxs {
+}
+.obj_boxs {
       display: grid;
       grid-template-columns: 1fr;
       list-style: none;
@@ -54,8 +54,8 @@ img{
       align-content: start;
       /*gap:0.2rem;*/
       /*border:3px black solid;*/
-  }
-  .content_ui {
+}
+.content_ui {
       display: grid;
       grid-template-columns: repeat(10,1fr);
       list-style: none;
@@ -64,8 +64,8 @@ img{
       align-content: start;
       /*gap:0.2rem;*/
       /*border:3px black solid;*/
-  }
-  .slot {
+}
+.slot {
           /* overflow: hidden; */
     /* position: relative; */
     /* display: flex; */
@@ -76,12 +76,12 @@ img{
     /* padding: 0rem; */
     z-index: 1;
     /* user-select: none;*/
-  }
-  slot:hover{
+}
+slot:hover{
       border: 1rem black solid;
       z-index: 9999;
-  }
-  .slot_wrapper{
+}
+.slot_wrapper{
       border: 0.1rem black solid;
       color: white;
       border-radius: 1rem;
@@ -89,27 +89,28 @@ img{
       transition: all 0.5s;
       width:100%;
       height: 100%;
-  }
-  .slot:hover .slot_wrapper{
+}
+.slot:hover .slot_wrapper{
       /*border: 0.3rem white solid;*/
       transform: perspective(900px) translateY(0%) rotateX(0deg) rotateY(40deg) translateZ(0);
-  }
-  .slot:hover .imgmonster{
+}
+.slot:hover .imgmonster{
       z-index: 10;
       opacity:0.5;
       max-height:110%;
       max-width:110%;
       /*width:150%;*/
-      filter: brightness(0%) saturate(0%);
+      filter: brightness(0%) saturate(0%) blur(2px);
       
-    
-  }
-  
-  .slot:hover .slot_3d{
+}
+.slot:hover .imgbackground{
+    transform: rotate(-45deg) !important;
+}
+.slot:hover .div_3d{
       visibility:visible;
       z-index: 10;
-  }
-  .slot:hover .img3d{
+}
+.slot:hover .img3d{
       opacity:1;
       max-height:120%;
       max-width:120%;
@@ -118,12 +119,13 @@ img{
       right:-1rem;
       bottom:-0.5rem;
       /*bottom:-10%;*/
-      box-shadow: 200px 200px 400px rgba(0, 0, 0, 0.4);
+      /*box-shadow: 200px 200px 400px rgba(0, 0, 0, 0.4);*/
       
-  }
-  .box{
+}
+
+.box{
       left:0rem;
-      border: 0.2rem black solid;
+      /*border: 0.2rem black solid;*/
       margin: 0.2rem;
       padding: 1rem;
       color: white;
@@ -131,16 +133,63 @@ img{
       /*height:150px;*/
       /*height:100%;*//*100%;*//*Este es variable*/
       /*width:90%;*/
-      overflow: hidden;
+      /*overflow: hidden;*/
       z-index: 1;
       background-color:rgba(255, 255, 255, 0.3);
-  }
-  
+      perspective: 2500px;
+}
+.box3d {
+    left:0rem;
+    margin: 0.2rem;
+    color: white;
+    border-radius: 1rem;    
+    z-index: 1;
+    perspective: 2500px;
+}
+.box_wrapper{
+    border: 0.1rem black solid;
+    color: white;
+    border-radius: 1rem;
+    position: relative;
+    transition: all 0.5s;
+    width:100%;
+    height: 100%;
+    margin: 0;
+    padding: 0%;
+}
+.box3d:hover .box_wrapper{
+    /*border: 0.3rem white solid;*/
+    transform: perspective(900px) translateY(0%) rotateX(0deg) rotateY(20deg) translateZ(0);
+}
+.box3d:hover .box_imgmonster{
+    z-index: 10;
+    opacity:0.5;
+    max-height:110%;
+    max-width:110%;
+    /*width:150%;*/
+    filter: brightness(0%) saturate(0%) blur(2px);
+}
+.box3d:hover .div_3d{
+    visibility:visible;
+    z-index: 10;
+}
+.box3d:hover .box_img3d{
+    opacity:1;
+    max-height:120%;
+    max-width:120%;
+    right:2rem;
+    bottom:-0.5rem;
+    
+}
+.box3d:hover .box_imgbackground{
+    transform: rotate(-45deg) !important;
+}
+
   
   .box_number {
       position: absolute;
       right:1.25rem;
-      top:-1rem;
+      top:0;
       
       color: black;
       opacity: .5;
@@ -167,33 +216,46 @@ img{
   
   .box_imgbackground {
       opacity: 0.3;
+      transition: all 0.5s;
       filter: invert(1);
       margin:0;
       max-width:100%;
       max-height:100%;
+      transform: rotate(45deg) !important;
   }
   .box_imgmonster{
   /*border:2px black solid;*/
+    opacity:1;
+    transition: all 0.5s;
       position: absolute;
       bottom: 0;
       right: 0;
   
       margin:0;
-      /*height:100%;*/
       max-width:100%;
       max-height:100%;
-      /*z-index: 1;
-      max-height:100%;
-      margin:0;*/
   }
+.box_img3d{
+    opacity:0;
+    transition: all 0.5s;
+    
+    position: absolute;
+    bottom: 0;
+    right: 0;
+      
+    margin:0;
+        
+    max-width:100%;
+    max-height:100%;
+}
   .box_img{
   /*border:2px red solid;*/
       text-align: right;
       width:100%;
       height:100%;
-      position: relative;
-      bottom:70%;
-      right:-5%;
+      position: absolute;
+      bottom: 0;
+      right: 0;
       z-index: 1 !important;
   }
   
@@ -207,7 +269,7 @@ img{
       left:0%;
       z-index: 1;
   }
-  slot_3d {
+  div_3d {
   /*border:2px blue solid;*/
       
       visibility:hidden;
@@ -219,13 +281,14 @@ img{
       
       /*position: absolute;*/
   }
+  
   .box_bg{
       text-align: right;
-      width:105%;
-      height:105%;
-      position: relative;
-      bottom:180%;
-      left:0%;
+      width:100%;
+      height:100%;
+      position: absolute;
+    bottom: 0;
+    left: 0%;
       z-index: 0 !important;
   }
   .slot_bg {
@@ -237,15 +300,10 @@ img{
       /*object-fit:cover;*/
       position: absolute;
       z-index: 0 !important;
-      /*130
-      position: relative;
-      bottom:212.5%;
-      right:15%;
-      z-index: 0 !important;
-      */
   }
   .imgbackground {
   /*border:2px red solid;*/
+  transition: all 0.5s;
   position: absolute;
   right:0;
       opacity: 0.3;
@@ -268,9 +326,10 @@ img{
       
       max-width:100%;
       max-height:100%;
+      
   }
   .img3d{
-  opacity:0;
+    opacity:0;
   transition: all 0.5s;
   
   /*border:2px green solid;*/
@@ -283,6 +342,7 @@ img{
       max-width:100%;
       max-height:100%;
   }
+
   .imgevo{
       max-width:100%;
       max-height:100%;
@@ -394,7 +454,7 @@ img{
       position:relative;
       z-index:2;
       text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-      height: 7rem;/*100px; */
+      padding: 1rem;
       text-transform: capitalize;
       font-weight: bold;
   }
@@ -655,10 +715,10 @@ img{
   }
   
   @media screen and (min-width: 345px){
-      .content_slots{
+      .obj_slots{
           grid-template-columns: 1fr 1fr;
       }
-      .content_boxs{
+      .obj_boxs{
           grid-template-columns: 1fr;
       }
       .imgevo {
@@ -667,10 +727,10 @@ img{
       }
   }
   @media screen and (min-width: 576px){
-      .content_slots {
+      .obj_slots {
           grid-template-columns: 1fr 1fr 1fr;
       }
-      .content_boxs {
+      .obj_boxs {
           grid-template-columns: 1fr 1fr;
       }
       .row_full{
@@ -682,10 +742,10 @@ img{
       }
   }
   @media screen and (min-width: 785px){
-      .content_slots {
+      .obj_slots {
           grid-template-columns: 1fr 1fr 1fr 1fr;
       }
-      .content_boxs {
+      .obj_boxs {
           grid-template-columns: 1fr 1fr 1fr;
       }
       .row_full{
@@ -703,10 +763,10 @@ img{
       }
   }
   @media screen and (min-width: 992px){
-      .content_slots {
+      .obj_slots {
           grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       }
-      .content_boxs {
+      .obj_boxs {
           grid-template-columns: 1fr 1fr 1fr 1fr;
       }
       .row_full{

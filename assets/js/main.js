@@ -239,7 +239,7 @@ function slot_html(){
     const slotBg = document.createElement("div");
     slotBg.setAttribute("class", "slot_bg");
     const slot3d = document.createElement("div");
-    slot3d.setAttribute("class", "slot_3d");
+    slot3d.setAttribute("class", "div_3d");
 
     card.appendChild(slotInfo);
     card.appendChild(slotImg);
@@ -268,7 +268,7 @@ function slot_monster_html(index,data){
     let slotInfo=slot.querySelector(".slot_info");
     let slotImg=slot.querySelector(".slot_img");
     let slotBg=slot.querySelector(".slot_bg");
-    let slot3d=slot.querySelector(".slot_3d");
+    let slot3d=slot.querySelector(".div_3d");
     
     slotCard.style.backgroundImage = `linear-gradient(to bottom, ${types_bg[1]} 0%, ${types_bg[1]} 40%, ${types_bg[2]} 75%, ${types_bg[2]} 100%)`;
     //en slotInfo#########
@@ -298,8 +298,7 @@ function slot_monster_html(index,data){
     imgMonster.onerror = function() {
         img_error(this);
     };
-    console.log("linea 287 falta cambiar start por default o gender o depende del skin_start")
-    console.log(imgMonster.src);
+    
     slotImg.appendChild(imgMonster);
     //en slotBg#########
     const imgBackground = document.createElement("img");
@@ -346,7 +345,29 @@ function box_html(){
     
     return box;
 }
+function box3d_html(){
+    //h es la altura, por defecto es 100% pero para header debe ser entre 120 y 130px
+        let box = document.createElement("div");
+        box.setAttribute("class", "box3d");
+        let card = document.createElement("div");
+        card.setAttribute("class", "box_wrapper");
 
+        const boxInfo = document.createElement("div");
+        boxInfo.setAttribute("class", "box_info");
+        const boxImg = document.createElement("div");
+        boxImg.setAttribute("class", "box_img");
+        const boxBg = document.createElement("div");
+        boxBg.setAttribute("class", "box_bg");
+        const box3d = document.createElement("div");
+        box3d.setAttribute("class", "box_3d");
+    
+        card.appendChild(boxInfo);
+        card.appendChild(boxImg);
+        card.appendChild(boxBg);
+        box.appendChild(card);
+        box.appendChild(box3d);
+        return box;
+    }
 
 function box_monsters_html(id,skin_name,skin_id,special,type){
     let monster=pokedex[id];
@@ -370,7 +391,7 @@ function box_monsters_html(id,skin_name,skin_id,special,type){
     
     
     let header=box_head_html(id,skin_name,skin_id,special,type);
-    let stats=box_stats_html(skin.stats,skin.type_1);
+    let stats=box_stats_html(skin.stats,skin.type_1,skin.type_2);
     let evos=box_evos_html(id,skin_name,skin_id,skin.evo);
     let shapes=box_shapes_html(id,monster.skin);
     let specials=box_specials_html(id,skin_name,skin_id,type);
@@ -390,7 +411,7 @@ function box_monsters_html(id,skin_name,skin_id,special,type){
 
 
 function box_head_html(index,skn,id,special,type){
-    let box_head=box_html();
+    let box_head=box3d_html();//box_html();
     box_head.classList.add("row_midl");
 /*VARIABLES*/
     let monster=pokedex[index];
@@ -399,10 +420,12 @@ function box_head_html(index,skn,id,special,type){
 		let types_html=type_html(skin.type_1,skin.type_2);
 		let types_bg=type_bg(skin.type_1,skin.type_2);
 		
-   box_head.style=`height: 150px; background-image: linear-gradient(to bottom, ${types_bg[1]} 0%, ${types_bg[1]} 40%, ${types_bg[2]} 75%, ${types_bg[2]} 100%);`;
-		let head_info=box_head.querySelector(".box_info");
+    let head_wrapper=box_head.querySelector(".box_wrapper");
+	let head_info=box_head.querySelector(".box_info");
     let head_img=box_head.querySelector(".box_img");
     let head_bg=box_head.querySelector(".box_bg");
+    let head_3d=box_head.querySelector(".box_3d");
+    head_wrapper.style=`height: 150px; background-image: linear-gradient(to bottom, ${types_bg[1]} 0%, ${types_bg[1]} 40%, ${types_bg[2]} 75%, ${types_bg[2]} 100%);`;
 		/*---HeadInfo---*/
     const NumberSpan = document.createElement("span");
     NumberSpan.setAttribute("class", "box_number");
@@ -448,14 +471,24 @@ function box_head_html(index,skn,id,special,type){
         img_error(this);
     };
     head_bg.appendChild(imgBg);
+    //---head3d---
+    const img3d = document.createElement("img");
+    img3d.setAttribute("class", "box_img3d");
+    img3d.setAttribute("src", `${url_img}${index}/${type}/${skn}/${id}/${special}.gif`);
+    img3d.setAttribute("alt", "");
+    /*imgMonster.loading="lazy";*/
+    img3d.onerror = function() {
+        img_error(this);
+    };
+    head_3d.appendChild(img3d);
     //return
     return box_head;
 }
 
-function box_stats_html(stats,type1){
+function box_stats_html(stats,type1,type2){
     let box_stats=box_html();
     box_stats.classList.add("row_midr");
-    let stats_html=func_stats_html(stats,type1);
+    let stats_html=func_stats_html(stats,type1,type2);
     
     const titleSpan = document.createElement("span");
     titleSpan.setAttribute("class", "box_title");
@@ -618,12 +651,11 @@ function type_html(type1,type2){
     }
     return result;
 }
-function func_stats_html(states,type1){
+function func_stats_html(stats,type1,type2){
     let result="";
-    let stats=Object.keys(states);
     //console.log(Object.keys(skin.stats).length);
-    stats.forEach((stat)=>{
-    let qty=states[stat];
+    Object.keys(stats).forEach((stat)=>{
+    let qty=stats[stat];
     result+=`
         <div class="stat-row">
                     <div class="stat-desc">${stat}</div>
@@ -646,7 +678,6 @@ function func_evo_html(id,skin,index,evos){
             `;
     }
     let _evo=Object.keys(evos);
-    //console.log(_evo.length);
     
     _evo.forEach((evo)=>{
         let e=evos[evo];
