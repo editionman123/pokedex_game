@@ -425,7 +425,7 @@ function box_head_html(index,skn,id,special,type){
     let head_img=box_head.querySelector(".box_img");
     let head_bg=box_head.querySelector(".box_bg");
     let head_3d=box_head.querySelector(".box_3d");
-    head_wrapper.style=`height: 150px; background-image: linear-gradient(to bottom, ${types_bg[1]} 0%, ${types_bg[1]} 40%, ${types_bg[2]} 75%, ${types_bg[2]} 100%);`;
+    head_wrapper.style=`background-image: linear-gradient(to bottom, ${types_bg[1]} 0%, ${types_bg[1]} 40%, ${types_bg[2]} 75%, ${types_bg[2]} 100%);`;
 		/*---HeadInfo---*/
     const NumberSpan = document.createElement("span");
     NumberSpan.setAttribute("class", "box_number");

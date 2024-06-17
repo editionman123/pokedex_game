@@ -110,6 +110,7 @@ slot:hover{
       z-index: 10;
 }
 .slot:hover .img3d{
+    transition: all 0.3s;
     visibility:visible;
       opacity:1;
       max-height:120%;
@@ -117,7 +118,7 @@ slot:hover{
       /*height: 120%;*/
       
       right:-1rem;
-      bottom:-0.5rem;
+      bottom:0rem;
       /*bottom:-10%;*/
       /*box-shadow: 200px 200px 400px rgba(0, 0, 0, 0.4);*/
       
@@ -173,6 +174,7 @@ slot:hover{
     z-index: 10;
 }
 .box3d:hover .box_img3d{
+    transition: all 0.3s;
     visibility:visible;
     opacity:1;
     max-height:120%;
@@ -189,12 +191,12 @@ slot:hover{
   .box_number {
       position: absolute;
       right:1.25rem;
-      bottom:0;
-      
-      color: rgb(255, 255, 255);
-      opacity: 1;
-      text-shadow: 0 0 0 #000, 0 0 0 #000, 0 0 0 #000, 0 0 0 #000;     
+      bottom:2rem;
+      opacity: 0.5;
+      color: rgba(255, 255, 255);
+      /*text-shadow: 0 0 0 #000, 0 0 0 #000, 0 0 0 #000, 0 0 0 #000;     */
       font-size:1.5rem;
+      /*filter: invert(1);*/
   }
   .box_name{
       font-size:2rem;
@@ -226,7 +228,7 @@ slot:hover{
   .box_imgmonster{
   /*border:2px black solid;*/
     opacity:1;
-    transition: all 0.5s;
+    transition: all 0.3s;
       position: absolute;
       bottom: 0;
       right: 0;
@@ -315,7 +317,7 @@ slot:hover{
   .imgmonster{
   /*border:2px blue solid;*/
   opacity:1;
-  transition: all 0.5s;
+  transition: all 0.3s;
   
       position: absolute;
       bottom: 0;
@@ -457,6 +459,7 @@ slot:hover{
       padding: 1rem;
       text-transform: capitalize;
       font-weight: bold;
+      height: 100%;
   }
   .slot_info {
   /*border:5px blue solid;*/
