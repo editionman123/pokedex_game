@@ -1,8 +1,9 @@
 var test;
 
 var action=false;
-var qualitys={1:"low",2:"mid",3:"monsters"};
-var url_img='https://raw.githubusercontent.com/editionman123/pokemon/main/'+qualitys[3]+'/';
+var qualitys={1:"low",2:"mid",3:"high"};
+var qlty=3;
+var url_img='https://raw.githubusercontent.com/editionman123/pokemon/main/';
 
 //POKEDEX
 var pokedex={};
@@ -292,7 +293,7 @@ function slot_monster_html(index,data){
 		//test=data;
     const imgMonster = document.createElement("img");
     imgMonster.setAttribute("class", "imgmonster");
-    imgMonster.setAttribute("src", `${url_img}${index}/skin/${data.skin_start}/0/0.gif`);
+    imgMonster.setAttribute("src", `${url_img}monsters/${index}/${qualitys[qlty]}/skin/${data.skin_start}/0/0.webp`);
     imgMonster.setAttribute("alt", "");
     /*imgMonster.loading="lazy";*/
     imgMonster.onerror = function() {
@@ -309,7 +310,7 @@ function slot_monster_html(index,data){
     //en slot3d########
     const img3d = document.createElement("img");
     img3d.setAttribute("class", "img3d");
-    img3d.setAttribute("src", `${url_img}${index}/skin/${data.skin_start}/0/0.gif`);
+    img3d.setAttribute("src", `${url_img}monsters/${index}/${qualitys[qlty]}/skin/${data.skin_start}/0/0.webp`);
     img3d.setAttribute("alt", "");
     /*imgMonster.loading="lazy";*/
     img3d.onerror = function() {
@@ -456,7 +457,7 @@ function box_head_html(index,skn,id,special,type){
 		/*---HeadImg---*/
 		const imgMonster = document.createElement("img");
     imgMonster.setAttribute("class", "box_imgmonster");
-    imgMonster.setAttribute("src", `${url_img}${index}/${type}/${skn}/${id}/${special}.gif`);
+    imgMonster.setAttribute("src", `${url_img}monsters/${index}/${qualitys[qlty]}/${type}/${skn}/${id}/${special}.webp`);
     imgMonster.setAttribute("alt", "");
     imgMonster.onerror = function() {
         img_error(this);
@@ -474,7 +475,7 @@ function box_head_html(index,skn,id,special,type){
     //---head3d---
     const img3d = document.createElement("img");
     img3d.setAttribute("class", "box_img3d");
-    img3d.setAttribute("src", `${url_img}${index}/${type}/${skn}/${id}/${special}.gif`);
+    img3d.setAttribute("src", `${url_img}monsters/${index}/${qualitys[qlty]}/${type}/${skn}/${id}/${special}.webp`);
     img3d.setAttribute("alt", "");
     /*imgMonster.loading="lazy";*/
     img3d.onerror = function() {
@@ -686,7 +687,7 @@ function func_evo_html(id,skin,index,evos){
         <span class="info_text">${conditions}</span>
         <div class="evo-row">
             <div class="boxy_img">
-                <img class="imgevo" src="${url_img}${id}/skin/${skin}/${index}/0.gif" onerror="img_error(this);" alt="">
+                <img class="imgevo" src="${url_img}monsters/${id}/${qualitys[qlty]}/skin/${skin}/${index}/0.webp" onerror="img_error(this);" alt="">
             </div>
             <div class="boxy_chain">
                <!--<img class="imgarrow" src="https://raw.githubusercontent.com/editionman123/pokemon/main/ux/right-arrow.png" alt=""> -->
@@ -696,7 +697,7 @@ function func_evo_html(id,skin,index,evos){
   		</svg>
             </div>
             <div onclick="openbox_skin(${e.to},'${e.skin}',${e.index},0);" class="boxy_img">
-                <img class="imgevo" src="${url_img}${e.to}/skin/${e.skin}/${e.index}/0.gif" onerror="img_error(this);" alt="">
+                <img class="imgevo" src="${url_img}monsters/${e.to}/${qualitys[qlty]}/skin/${e.skin}/${e.index}/0.webp" onerror="img_error(this);" alt="">
             </div>
         </div>
         `;
@@ -742,7 +743,7 @@ function func_shape_html(id, shapes){
          result+=`
          <div class="boxy_img" onclick="openbox_skin(${id},'${skin}',${index},0);">
              
-             <img class="imgevo" src="${url_img}${id}/skin/${skin}/${index}/0.gif" onerror="img_error(this);" alt="">
+             <img class="imgevo" src="${url_img}monsters/${id}/${qualitys[qlty]}/skin/${skin}/${index}/0.webp" onerror="img_error(this);" alt="">
              <span class="textevo">${shapes[skin][index].name_skin}</span>
              
          </div>
@@ -771,11 +772,11 @@ function func_special_html(id,skin,index,type){
     result+=`<div class="evo-row">`;
          result+=`
          <div onclick="${fun}(${id},'${skin}',${index},0);" class="boxy_img">
-                <img class="imgevo" src="${url_img}${id}/${type}/${skin}/${index}/0.gif" onerror="img_error(this);" alt="">
+                <img class="imgevo" src="${url_img}monsters/${id}/${qualitys[qlty]}/${type}/${skin}/${index}/0.webp" onerror="img_error(this);" alt="">
                 <span class="textevo">Regular</span>
          </div>
          <div onclick="${fun}(${id},'${skin}',${index},1,'${type}');" class="boxy_img">
-                <img class="imgevo" src="${url_img}${id}/${type}/${skin}/${index}/1.gif" onerror="img_error(this);" alt="">
+                <img class="imgevo" src="${url_img}monsters/${id}/${qualitys[qlty]}/${type}/${skin}/${index}/1.webp" onerror="img_error(this);" alt="">
                 <span class="textevo">Shiny</span>
          </div>
          `;
@@ -804,7 +805,7 @@ function func_battles_html(id, battleskin){
          result+=`
          <div class="boxy_img" onclick="openbox_battleskin(${id},'${bskin}',${index},0);">
              
-             <img class="imgevo" src="${url_img}${id}/battle_skin/${bskin}/${index}/0.gif" onerror="img_error(this);" alt="">
+             <img class="imgevo" src="${url_img}monsters/${id}/${qualitys[qlty]}/battle_skin/${bskin}/${index}/0.webp" onerror="img_error(this);" alt="">
              <span class="textevo">${battleskin[bskin][index].name_skin}</span>
              
          </div>
@@ -860,7 +861,8 @@ function type_bg(type1,type2){
 
 
 function next_qlty(qlty){//1:low-2:mid-3:monsters
-    if(!qualitys[qlty])qlty=1; url_img='https://raw.githubusercontent.com/editionman123/pokemon/main/'+qualitys[qlty]+'/';
+    if(!qualitys[q])qlty=1;
+    else qlty=q;
     pokedex_list.innerHTML = '';
     socket.emit("pokedex_gen",{gen:parseInt(select_generation.value)});
 }
