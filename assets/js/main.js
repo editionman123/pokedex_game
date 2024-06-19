@@ -860,7 +860,7 @@ function type_bg(type1,type2){
 
 
 
-function next_qlty(qlty){//1:low-2:mid-3:monsters
+function next_qlty(q){//1:low-2:mid-3:monsters
     if(!qualitys[q])qlty=1;
     else qlty=q;
     pokedex_list.innerHTML = '';
