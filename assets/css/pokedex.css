@@ -45,6 +45,9 @@ img{
       /*gap:0.5rem;*/
       /*border:3px black solid;*/
 }
+.obj_slots:hover > :not(:hover) {
+    z-index:0; /* Hace visible el slot hovereado */
+}
 .obj_boxs {
       display: grid;
       grid-template-columns: 1fr;
