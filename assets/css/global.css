@@ -163,3 +163,60 @@
 .on_static{
     z-index:2;
 }
+
+
+
+
+
+
+
+
+:root {
+    --color-0: #000000; /* Default color */
+    --color-1: #B7B7CE; /* Steel */
+    --color-2: #6390F0; /* Water */
+    --color-3: #A6B91A; /* Bug */
+    --color-4: #6F35FC; /* Dragon */
+    --color-5: #F7D02C; /* Electric */
+    --color-6: #735797; /* Ghost */
+    --color-7: #EE8130; /* Fire */
+    --color-8: #D685AD; /* Fairy */
+    --color-9: #96D9D6; /* Ice */
+    --color-10: #C22E28; /* Fighting */
+    --color-11: #A8A77A; /* Normal */
+    --color-12: #7AC74C; /* Grass */
+    --color-13: #F95587; /* Psychic */
+    --color-14: #B6A136; /* Rock */
+    --color-15: #705746; /* Dark */
+    --color-16: #E2BF65; /* Ground */
+    --color-17: #A33EA1; /* Poison */
+    --color-18: #A98FF3; /* Flying */
+}
+
+@keyframes rainbow {
+    0% { background-position: 100% 67%; }
+    50% { background-position: 67% 34%; }
+    100% { background-position: 34% 0%; }
+}
+
+.text_adm {
+    background: linear-gradient(45deg, 
+        var(--color-1), var(--color-2), var(--color-3), var(--color-4), var(--color-5),
+        var(--color-6), var(--color-7), var(--color-8), var(--color-9), var(--color-10),
+        var(--color-11), var(--color-12), var(--color-13), var(--color-14), var(--color-15),
+        var(--color-16), var(--color-17), var(--color-18)
+    );
+    background-size: 2000% 2000%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: capitalize;
+    font-weight: bold;
+    padding: 0.3rem;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    z-index: 1;
+    animation: rainbow 10s linear infinite;
+    -webkit-text-stroke: 0.08rem black; /* Añade un borde negro al texto */
+}
+
+
