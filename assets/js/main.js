@@ -5,12 +5,13 @@ var qualitys={1:"low",2:"mid",3:"high"};
 var qlty=3;
 var url_img='https://raw.githubusercontent.com/editionman123/pokemon/main/';
 
+
+const frames=document.getElementById('ux_frame');
 //POKEDEX
 var pokedex={};
 let index_pokedex = 0;
 const load_pokedex = document.getElementById('load_mons');
 const select_generation = document.getElementById('select_gen');
-
 var f_pokedex=document.getElementById("frame_pokedex");
 const pokedex_list = document.getElementById('pokedex_slots');
 
@@ -52,6 +53,7 @@ var types={
     18:"Flying",
     19:"Astral",
 };
+/*
 var colors={
     0:"",
     1:"#B7B7CE",
@@ -73,7 +75,7 @@ var colors={
     17:"#A33EA1",
     18:"#A98FF3",
 };
-
+*/
 var socket=null;
 
 function connect_socket(host) {
@@ -109,16 +111,16 @@ connect_socket("https://pokemonuniverse-privado.glitch.me/");
 
 
 
-function loadPokemonItens(i, gen) {
-    socket.emit("pokedex",{index:i,gen:gen});
-    switcher_details(false);
+function loadPokemonItens(frame) {
+    if(frame==="frame_pokedex"){
+        socket.emit("pokedex",{index:index_pokedex,gen:parseInt(select_generation.value)});
+        switcher_details(frame,false);
+    }
 }
-
-loadPokemonItens(index_pokedex,parseInt(select_generation.value));
 
 
 load_pokedex.addEventListener('click', () => {
-loadPokemonItens(index_pokedex, parseInt(select_generation.value));
+    loadPokemonItens("frame_pokedex");
 })
 
 select_generation.addEventListener('change', () => {
@@ -136,7 +138,7 @@ function openbox_skin(id,skin_name,skin_id,special=0){
     if(!pokedex[id]){//
         return socket.emit("pokedex_id",{id:id,skin:skin_name,index:skin_id});
     }
-    switcher_details(true);
+    switcher_details("frame_pokedex",true);
     
     //let skin_name="start";//este debe venir desde la func
     //let skin_id=0;
@@ -152,7 +154,7 @@ function openbox_battleskin(id,skin_name,skin_id,special=0){
     if(!pokedex[id]){//
         return socket.emit("pokedex_id",{id:id,skin:skin_name,index:skin_id});
     }
-    switcher_details(true);
+    switcher_details("frame_pokedex",true);
     
      box_monsters_html(id,skin_name,skin_id,special,"battle_skin");
 }
@@ -271,7 +273,8 @@ function slot_monster_html(index,data){
     let slotBg=slot.querySelector(".slot_bg");
     let slot3d=slot.querySelector(".div_3d");
     
-    slotCard.style.backgroundImage = `linear-gradient(to bottom, ${types_bg[1]} 0%, ${types_bg[1]} 40%, ${types_bg[2]} 75%, ${types_bg[2]} 100%)`;
+    //slotCard.style.backgroundImage = `linear-gradient(to bottom, ${types_bg[1]} 0%, ${types_bg[1]} 40%, ${types_bg[2]} 75%, ${types_bg[2]} 100%)`;
+    slotCard.style.backgroundImage = `linear-gradient(to bottom, var(--color-${types_bg[1]}) 0%, var(--color-${types_bg[1]}) 40%, var(--color-${types_bg[2]}) 75%, var(--color-${types_bg[2]}) 100%)`;
     //en slotInfo#########
     const nameSpan = document.createElement("span");
     nameSpan.setAttribute("class", "name");
@@ -426,7 +429,8 @@ function box_head_html(index,skn,id,special,type){
     let head_img=box_head.querySelector(".box_img");
     let head_bg=box_head.querySelector(".box_bg");
     let head_3d=box_head.querySelector(".box_3d");
-    head_wrapper.style=`background-image: linear-gradient(to bottom, ${types_bg[1]} 0%, ${types_bg[1]} 40%, ${types_bg[2]} 75%, ${types_bg[2]} 100%);`;
+    head_wrapper.style=`background-image: linear-gradient(to bottom, var(--color-${types_bg[1]}) 0%, var(--color-${types_bg[1]}) 40%, var(--color-${types_bg[2]})75%, var(--color-${types_bg[2]})100%);`;
+    
 		/*---HeadInfo---*/
     const NumberSpan = document.createElement("span");
     NumberSpan.setAttribute("class", "box_number");
@@ -848,11 +852,11 @@ function func_battles_html(id, battleskin){
 function type_bg(type1,type2){
     let result={};
     if(type2){
-        result[1]=colors[type1];
-        result[2]=colors[type2];
+        result[1]=type1;//colors[type1];
+        result[2]=type2;//colors[type2];
     }else{
-        result[1]=colors[type1];
-        result[2]=colors[type1];
+        result[1]=type1;//colors[type1];
+        result[2]=type1;//colors[type1];
     }
     return result;
 }
@@ -867,29 +871,42 @@ function next_qlty(q){//1:low-2:mid-3:monsters
     socket.emit("pokedex_gen",{gen:parseInt(select_generation.value)});
 }
 
-function close_details(){
+function close_details(frame){
     if(!action)return;
-    switcher_details(false);
+    switcher_details(frame,false);
 }
 function toggle_frame(bool,frame){
-    action=false;
-    let f=document.getElementById(frame);
-    if(!bool){
-        f.classList.remove("On");
-        f.classList.remove("on_static");
-        f.classList.add("Off");
-    }else{
-        f.classList.remove("Off");
-        f.classList.remove("off_static");
-        f.classList.add("On");
-    }
+    action=false; 
+    
+    //let f=document.getElementById(frame);
+    Object.keys(frames.children).forEach(fr=>{
+        let f=frames.children[fr];
+        if(f.id===frame){
+            if(!bool){
+                f.classList.remove("On");
+                f.classList.remove("on_static");
+                f.classList.add("Off");
+            }else{
+                f.classList.remove("Off");
+                f.classList.remove("off_static");
+                f.classList.add("On");
+                load_frame(frame);
+            }
+        }else{
+            f.classList.remove("On");
+            f.classList.remove("on_static");
+            f.classList.add("Off");
+        }
+    })
     
     setTimeout(()=>{
         action=true;
      },3000);
 }
-
-function switcher_details(bool){
+function load_frame(f){
+    loadPokemonItens(f);
+}
+function switcher_details(frame,bool){
     if(bool){
         action=false;
         f_monster.classList.remove("Off");

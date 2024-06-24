@@ -1,7 +1,25 @@
-* {
-    
-}
 
+:root {
+    --color-0: #000000; /* Default color */
+    --color-1: #B7B7CE; /* Steel */
+    --color-2: #6390F0; /* Water */
+    --color-3: #A6B91A; /* Bug */
+    --color-4: #6F35FC; /* Dragon */
+    --color-5: #F7D02C; /* Electric */
+    --color-6: #735797; /* Ghost */
+    --color-7: #EE8130; /* Fire */
+    --color-8: #D685AD; /* Fairy */
+    --color-9: #96D9D6; /* Ice */
+    --color-10: #C22E28; /* Fighting */
+    --color-11: #A8A77A; /* Normal */
+    --color-12: #7AC74C; /* Grass */
+    --color-13: #F95587; /* Psychic */
+    --color-14: #B6A136; /* Rock */
+    --color-15: #705746; /* Dark */
+    --color-16: #E2BF65; /* Ground */
+    --color-17: #A33EA1; /* Poison */
+    --color-18: #A98FF3; /* Flying */
+}
 .frame{
     font-family: 'Roboto', sans-serif;
     /*padding: 1rem;*/
@@ -171,27 +189,7 @@
 
 
 
-:root {
-    --color-0: #000000; /* Default color */
-    --color-1: #B7B7CE; /* Steel */
-    --color-2: #6390F0; /* Water */
-    --color-3: #A6B91A; /* Bug */
-    --color-4: #6F35FC; /* Dragon */
-    --color-5: #F7D02C; /* Electric */
-    --color-6: #735797; /* Ghost */
-    --color-7: #EE8130; /* Fire */
-    --color-8: #D685AD; /* Fairy */
-    --color-9: #96D9D6; /* Ice */
-    --color-10: #C22E28; /* Fighting */
-    --color-11: #A8A77A; /* Normal */
-    --color-12: #7AC74C; /* Grass */
-    --color-13: #F95587; /* Psychic */
-    --color-14: #B6A136; /* Rock */
-    --color-15: #705746; /* Dark */
-    --color-16: #E2BF65; /* Ground */
-    --color-17: #A33EA1; /* Poison */
-    --color-18: #A98FF3; /* Flying */
-}
+
 
 @keyframes rainbow {
     0% { background-position: 100% 67%; }
@@ -207,8 +205,8 @@
         var(--color-16), var(--color-17), var(--color-18)
     );
     background-size: 2000% 2000%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /*-webkit-background-clip: text;*/
+    -webkit-text-fill-color: white;
     text-transform: capitalize;
     font-weight: bold;
     padding: 0.3rem;
