@@ -97,7 +97,6 @@ function socket_reciver(){
 	});
 	socket.on("pokedex",(data)=>{
 	pokedex=Object.assign(pokedex,data.monsters);
-		console.log(Object.keys(data.monsters).length);
 		//test=data;		
 		//i,"start",0
 		Object.keys(data.monsters).forEach(i=>{
@@ -402,8 +401,8 @@ function box_monsters_html(id,skin_name,skin_id,special,type){
     let battleskin=box_battleskins_html(id,monster.battle_skin);
     
     
-    monster_list.appendChild(btnNext);
-    monster_list.appendChild(btnPrev);
+    f_monster.appendChild(btnNext);
+    f_monster.appendChild(btnPrev);
     
     monster_list.appendChild(header);
     monster_list.appendChild(stats);
@@ -877,9 +876,9 @@ function close_details(frame){
 }
 function toggle_frame(bool,frame){
     action=false;
+    let load=false;
     Object.keys(frames.children).forEach(fr=>{
         let f=frames.children[fr];
-        console.log(f);
         if(f.id===frame){
             if(!bool){
                 f.classList.remove("On");
@@ -889,7 +888,7 @@ function toggle_frame(bool,frame){
                 f.classList.remove("Off");
                 f.classList.remove("off_static");
                 f.classList.add("On");
-                loadPokemonItens(f);
+                load=true;
             }
         }else{
             f.classList.remove("On");
@@ -900,7 +899,8 @@ function toggle_frame(bool,frame){
     
     setTimeout(()=>{
         action=true;
-     },3000);
+        if(load)loadPokemonItens(frame);
+     },500);
 }
 
 function switcher_details(frame,bool){
@@ -913,7 +913,7 @@ function switcher_details(frame,bool){
         setTimeout(()=>{
            action=true; f_monster.classList.remove("On"); f_monster.classList.add("on_static"); f_pokedex.classList.remove("off_static");
             f_pokedex.classList.add("Off");
-        },300);
+        },500);
         
     }else{
        action=false;                 f_monster.classList.remove("on_static");         f_monster.classList.add("off_static"); f_pokedex.classList.remove("Off");
@@ -921,7 +921,7 @@ function switcher_details(frame,bool){
         setTimeout(()=>{
             action=true;         f_monster.classList.remove("off_static"); f_monster.classList.add("Off"); f_pokedex.classList.remove("On");
             f_pokedex.classList.add("on_static");
-        },300);
+        },500);
     }
 }
 function img_error(e){

@@ -83,7 +83,8 @@
                 <div class="line one"></div>
                 <div class="line two"></div>
             </div>
-            <select name="select_gen" id="select_gen">
+            
+            <select name="select_gen" style="position: absolute;" id="select_gen">
                 <option selected value="1">1st Gen</option>
                 <option value="2">2nd Gen</option>
                 <option value="3">3rd Gen</option>
@@ -94,10 +95,14 @@
                 <option value="8">8th Gen</option>
                 <option value="9">9th Gen</option>
             </select>
-            <ol class="obj_slots" id="pokedex_slots"></ol>
-            <div class="pagination">
-                <button id="load_mons" type="button">Load More</button>
+            <div class="scrollable">
+                <ol class="obj_slots" id="pokedex_slots"></ol>
+                <div class="pagination">
+                    <button id="load_mons" type="button">Load More</button>
+                </div>
             </div>
+            
+            
         </section>
         <!--*frame de detalles de monster id*/-->
         <section class="frame_box Off" id="frame_monster">
@@ -106,7 +111,9 @@
                 <div class="line one"></div>
                 <div class="line two"></div>
             </div>
-            <ol class="obj_boxs" id="content_monster"></ol>
+            <div class="scrollable">
+                <ol class="obj_boxs" id="content_monster"></ol>
+            </div>
         </section>
         <!--######################################-->
         <!--######################################-->
@@ -151,26 +158,29 @@
                 <div class="line one"></div>
                 <div class="line two"></div>
             </div>
-            <ol class="obj_chat" id="chatdex_slots">
-                <div class="message one">test: sdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsd</div>
-                <div class="message two">add: cbdfgsfcbdfgsfcbdfgsfcbdfgsf</div>
-                <div class="message three">qweasfdass</div>
-                <div class="message four"></div>
-                <div class="message five"></div>
-                <div class="message six"></div>
-                <div class="message one"></div>
-                <div class="message two"></div>
-                <div class="message three"></div>
-                <div class="message four"></div>
-                <div class="message five"></div>
-                <div class="message six"></div>
-                <div class="message one"></div>
-                <div class="message two"></div>
-                <div class="message three"></div>
-                <div class="message four"></div>
-                <div class="message five"></div>
-                <div class="message six"></div>
-            </ol>
+            <h3 style="color: white;margin: 5px;font-weight: bold;font-size: x-large;padding: 0;">CHAT</h3>
+            <div class="scrollable_chat">
+                <ol class="obj_chat" id="chatdex_slots">
+                    <div class="message one">test: sdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsd</div>
+                    <div class="message two">add: cbdfgsfcbdfgsfcbdfgsfcbdfgsf</div>
+                    <div class="message three">qweasfdass</div>
+                    <div class="message four"></div>
+                    <div class="message five"></div>
+                    <div class="message six"></div>
+                    <div class="message one"></div>
+                    <div class="message two"></div>
+                    <div class="message three"></div>
+                    <div class="message four"></div>
+                    <div class="message five"></div>
+                    <div class="message six"></div>
+                    <div class="message one"></div>
+                    <div class="message two"></div>
+                    <div class="message three"></div>
+                    <div class="message four"></div>
+                    <div class="message five"></div>
+                    <div class="message six"></div>
+                </ol>
+            </div>
             <div class="sender-area">
                 <div class="input-place">
                     <input placeholder="Send a message." class="send-input" type="text">
