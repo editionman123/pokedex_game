@@ -59,7 +59,7 @@
             <div class="bot">
                 BOT
             </div>
-            <div onclick="toggle_frame(false,'frame_chatdex')" class="leftfoot">
+            <div onclick="toggle_frame(true,'frame_chatdex')" class="leftfoot">
                 <img class="btn-rh" src="https://www.svgrepo.com/show/390585/chat-email-forum-letter-mail-message.svg" alt="">
             </div>
             <div class="rightfoot">
@@ -78,27 +78,34 @@
         <!--######################################-->
         <!--/*frame principal de pokedex*/-->
         <section class="frame_box Off" id="frame_pokedex">
-            <button onclick="toggle_frame(false,'frame_pokedex')" class="warning_btn" type="button">close</button>
-        <select name="select_gen" id="select_gen">
-            <option selected value="1">1st Gen</option>
-            <option value="2">2nd Gen</option>
-            <option value="3">3rd Gen</option>
-            <option value="4">4th Gen</option>
-            <option value="5">5th Gen</option>
-            <option value="6">6th Gen</option>
-            <option value="7">7th Gen</option>
-            <option value="8">8th Gen</option>
-            <option value="9">9th Gen</option>
-        </select>
-            <ol class="obj_slots" id="pokedex_slots">
-            </ol>
+            <!--<button onclick="toggle_frame(false,'frame_pokedex')" class="warning_btn" type="button">close</button>-->
+            <div onclick="toggle_frame(false,'frame_pokedex')" class="close">
+                <div class="line one"></div>
+                <div class="line two"></div>
+            </div>
+            <select name="select_gen" id="select_gen">
+                <option selected value="1">1st Gen</option>
+                <option value="2">2nd Gen</option>
+                <option value="3">3rd Gen</option>
+                <option value="4">4th Gen</option>
+                <option value="5">5th Gen</option>
+                <option value="6">6th Gen</option>
+                <option value="7">7th Gen</option>
+                <option value="8">8th Gen</option>
+                <option value="9">9th Gen</option>
+            </select>
+            <ol class="obj_slots" id="pokedex_slots"></ol>
             <div class="pagination">
                 <button id="load_mons" type="button">Load More</button>
             </div>
         </section>
         <!--*frame de detalles de monster id*/-->
         <section class="frame_box Off" id="frame_monster">
-            <button onclick="close_details('frame_pokedex')" class="circle_btn" type="button">X</button>
+            <!--<button onclick="close_details('frame_pokedex')" class="circle_btn" type="button">X</button>-->
+            <div onclick="close_details('frame_pokedex')" class="close_subframe">
+                <div class="line one"></div>
+                <div class="line two"></div>
+            </div>
             <ol class="obj_boxs" id="content_monster"></ol>
         </section>
         <!--######################################-->
@@ -108,25 +115,29 @@
         <!--/*frame principal de items*/-->
         <section class="frame_box Off" id="frame_itemdex">
             <button onclick="toggle_frame(false,'frame_itemdex')" class="warning_btn" type="button">close</button>
-        <select name="select_item" id="select_item">
-            <option selected value="ball">Balls</option>
-            <option value="battle">Battle</option>
-            <option value="3">3rd Gen</option>
-            <option value="4">4th Gen</option>
-            <option value="5">5th Gen</option>
-            <option value="6">6th Gen</option>
-            <option value="7">7th Gen</option>
-            <option value="8">8th Gen</option>
-            <option value="9">9th Gen</option>
-        </select>
-        <ol class="obj_slots" id="itemdex_slots">   
-        </ol>
-        <div class="pagination">
-            <button id="load_items" type="button">Load More</button>
-        </div>
+            <select name="select_gen" id="select_gen">
+                <option selected value="1">1st Gen</option>
+                <option value="2">2nd Gen</option>
+                <option value="3">3rd Gen</option>
+                <option value="4">4th Gen</option>
+                <option value="5">5th Gen</option>
+                <option value="6">6th Gen</option>
+                <option value="7">7th Gen</option>
+                <option value="8">8th Gen</option>
+                <option value="9">9th Gen</option>
+            </select>
+            <ol class="obj_slots" id="itemdex_slots"></ol>
+            <div class="pagination">
+                <button id="load_mons" type="button">Load More</button>
+            </div>
+        </section>
         <!--*frame de detalles de item id*/-->
         <section class="frame_box Off" id="frame_item">
-            <button onclick="close_details('frame_itemdex')" class="circle_btn" type="button">X</button>
+            <!--<button onclick="close_details('frame_itemdex')" class="circle_btn" type="button">X</button>-->
+            <div onclick="close_details('frame_itemdex')" class="close_subframe">
+                <div class="line one"></div>
+                <div class="line two"></div>
+            </div>
             <ol class="obj_boxs" id="content_item"></ol>
         </section>
         <!--######################################-->
@@ -135,18 +146,41 @@
         <!--######################################-->
         <!--/*frame principal de CHAT*/-->
         <section class="frame_box on_static" id="frame_chatdex">
-            <button onclick="toggle_frame(false,'frame_chatdex')" class="warning_btn" type="button">close</button>
-        <select name="select_item" id="select_item">
-            CHAT
-            
-        </select>
-        <ol class="obj_slots" id="itemdex_slots">   
-        </ol>
-        <div class="pagination">
-            <button id="load_items" type="button">Load More</button>
-        </div>
+            <!--<button onclick="toggle_frame(false,'frame_chatdex')" class="warning_btn" type="button">close</button>-->
+            <div onclick="toggle_frame(false,'frame_chatdex')" class="close">
+                <div class="line one"></div>
+                <div class="line two"></div>
+            </div>
+            <ol class="obj_chat" id="chatdex_slots">
+                <div class="message one">test: sdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsdsdfdsfsd</div>
+                <div class="message two">add: cbdfgsfcbdfgsfcbdfgsfcbdfgsf</div>
+                <div class="message three">qweasfdass</div>
+                <div class="message four"></div>
+                <div class="message five"></div>
+                <div class="message six"></div>
+                <div class="message one"></div>
+                <div class="message two"></div>
+                <div class="message three"></div>
+                <div class="message four"></div>
+                <div class="message five"></div>
+                <div class="message six"></div>
+                <div class="message one"></div>
+                <div class="message two"></div>
+                <div class="message three"></div>
+                <div class="message four"></div>
+                <div class="message five"></div>
+                <div class="message six"></div>
+            </ol>
+            <div class="sender-area">
+                <div class="input-place">
+                    <input placeholder="Send a message." class="send-input" type="text">
+                    <div class="send">
+                        <svg class="send-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g><g><path fill="#6B6C7B" d="M481.508,210.336L68.414,38.926c-17.403-7.222-37.064-4.045-51.309,8.287C2.86,59.547-3.098,78.551,1.558,96.808 L38.327,241h180.026c8.284,0,15.001,6.716,15.001,15.001c0,8.284-6.716,15.001-15.001,15.001H38.327L1.558,415.193 c-4.656,18.258,1.301,37.262,15.547,49.595c14.274,12.357,33.937,15.495,51.31,8.287l413.094-171.409 C500.317,293.862,512,276.364,512,256.001C512,235.638,500.317,218.139,481.508,210.336z"></path></g></g></svg>
+                    </div>
+                  </div>
+              </div>
+        </section>
     </section>
-    
 </body>
 <!-- JS -->
 <script src="assets/js/pokemon-model.js"></script>

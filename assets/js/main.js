@@ -876,11 +876,10 @@ function close_details(frame){
     switcher_details(frame,false);
 }
 function toggle_frame(bool,frame){
-    action=false; 
-    
-    //let f=document.getElementById(frame);
+    action=false;
     Object.keys(frames.children).forEach(fr=>{
         let f=frames.children[fr];
+        console.log(f);
         if(f.id===frame){
             if(!bool){
                 f.classList.remove("On");
@@ -890,7 +889,7 @@ function toggle_frame(bool,frame){
                 f.classList.remove("Off");
                 f.classList.remove("off_static");
                 f.classList.add("On");
-                load_frame(frame);
+                loadPokemonItens(f);
             }
         }else{
             f.classList.remove("On");
@@ -903,27 +902,25 @@ function toggle_frame(bool,frame){
         action=true;
      },3000);
 }
-function load_frame(f){
-    loadPokemonItens(f);
-}
+
 function switcher_details(frame,bool){
     if(bool){
         action=false;
         f_monster.classList.remove("Off");
         f_monster.classList.add("On");
         f_pokedex.classList.remove("on_static");
-f_pokedex.classList.add("off_static");
+        f_pokedex.classList.add("off_static");
         setTimeout(()=>{
            action=true; f_monster.classList.remove("On"); f_monster.classList.add("on_static"); f_pokedex.classList.remove("off_static");
-f_pokedex.classList.add("Off");
+            f_pokedex.classList.add("Off");
         },300);
         
     }else{
        action=false;                 f_monster.classList.remove("on_static");         f_monster.classList.add("off_static"); f_pokedex.classList.remove("Off");
-f_pokedex.classList.add("On");
+        f_pokedex.classList.add("On");
         setTimeout(()=>{
             action=true;         f_monster.classList.remove("off_static"); f_monster.classList.add("Off"); f_pokedex.classList.remove("On");
-f_pokedex.classList.add("on_static");
+            f_pokedex.classList.add("on_static");
         },300);
     }
 }
