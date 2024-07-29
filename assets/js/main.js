@@ -96,9 +96,7 @@ function socket_reciver(){
 	    openbox_skin(data.id,data.skin,data.index,0);
 	});
 	socket.on("pokedex",(data)=>{
-	pokedex=Object.assign(pokedex,data.monsters);
-		//test=data;		
-		//i,"start",0
+	    pokedex=Object.assign(pokedex,data.monsters);
 		Object.keys(data.monsters).forEach(i=>{
 		    let card=slot_monster_html(i,data.monsters[i]);
 		    pokedex_list.appendChild(card);
@@ -147,15 +145,24 @@ function openbox_skin(id,skin_name,skin_id,special=0){
 function openbox_battleskin(id,skin_name,skin_id,special=0){
     if(!action)return;//no se ejecuta
     //console.log(id,skin_name,skin_id);
-    // 
     monster_list.innerHTML="";
-    
     if(!pokedex[id]){//
         return socket.emit("pokedex_id",{id:id,skin:skin_name,index:skin_id});
     }
     switcher_details("frame_pokedex",true);
     
      box_monsters_html(id,skin_name,skin_id,special,"battle_skin");
+}
+function openbox_fusionskin(id,skin_name,skin_id,special=0){
+    if(!action)return;//no se ejecuta
+    //console.log(id,skin_name,skin_id);
+    monster_list.innerHTML="";
+    if(!pokedex[id]){//
+        return socket.emit("pokedex_id",{id:id,skin:skin_name,index:skin_id});
+    }
+    switcher_details("frame_pokedex",true);
+    
+     box_monsters_html(id,skin_name,skin_id,special,"fusion_skin");
 }
 
 
@@ -298,7 +305,7 @@ function slot_monster_html(index,data){
     imgMonster.setAttribute("src", `${url_img}monsters/${index}/skin/${data.skin_start}/0/${qualitys[qlty]}/0.webp`);
     imgMonster.setAttribute("alt", "");
     /*imgMonster.loading="lazy";*/
-    console.log(imgMonster.src);
+    //console.log(imgMonster.src);
     imgMonster.onerror = function() {
         img_error(this);
     };
@@ -400,6 +407,7 @@ function box_monsters_html(id,skin_name,skin_id,special,type){
     let shapes=box_shapes_html(id,monster.skin);
     let specials=box_specials_html(id,skin_name,skin_id,type);
     let battleskin=box_battleskins_html(id,monster.battle_skin);
+    let fusionskin=box_fusionskins_html(id,monster.fusion_skin);
     
     
     f_monster.appendChild(btnNext);
@@ -411,6 +419,7 @@ function box_monsters_html(id,skin_name,skin_id,special,type){
     monster_list.appendChild(shapes);
     monster_list.appendChild(specials);
     monster_list.appendChild(battleskin);
+    monster_list.appendChild(fusionskin);
 }
 
 
@@ -619,6 +628,31 @@ function box_battleskins_html(id,battleskin){
     box_battle.removeChild(head_bg);
     return box_battle;
 }
+function box_fusionskins_html(id,fusionskin){
+    box_fusion=box_html();
+    box_fusion.classList.add("row_full");
+    let battle_html=func_fusions_html(id, fusionskin);
+    
+    const titleSpan = document.createElement("span");
+    titleSpan.setAttribute("class", "box_title");
+    titleSpan.textContent = "Fusion Formes";
+    box_fusion.appendChild(titleSpan);
+    
+    const fusionDiv = document.createElement("div");
+    fusionDiv.setAttribute("class", "stats");
+    fusionDiv.innerHTML = battle_html;
+    
+    box_fusion.appendChild(titleSpan);
+    box_fusion.appendChild(fusionDiv);
+    
+    let head_info=box_fusion.querySelector(".box_info");
+    let head_img=box_fusion.querySelector(".box_img");
+    let head_bg=box_fusion.querySelector(".box_bg");
+    box_fusion.removeChild(head_info);
+    box_fusion.removeChild(head_img);
+    box_fusion.removeChild(head_bg);
+    return box_fusion;
+}
 
 
 
@@ -811,6 +845,45 @@ function func_battles_html(id, battleskin){
              
              <img class="imgevo" src="${url_img}monsters/${id}/battle_skin/${bskin}/${index}/${qualitys[qlty]}/0.webp" onerror="img_error(this);" alt="">
              <span class="textevo">${battleskin[bskin][index].name_skin}</span>
+             
+         </div>
+         `;
+        count++;
+        count_all++;
+        if(count>3){
+            result+=`</div>`;
+            count=0;
+        }if(count_all>=count_max){
+            result+=`</div>`;
+            count_all=0;
+            count=0;
+        }
+        });
+    });
+    return result;
+}
+function func_fusions_html(id, fusionskin){
+    let result=``;
+    let count_all=0;
+    let count = 0;
+    if(!Object.keys(fusionskin).length){
+        return result=`
+            <span class="info_text">Not found fusion formes.</span>
+            `;
+    } Object.keys(fusionskin).forEach((fskin)=>{
+    let count_max=Object.keys(fusionskin[fskin]).length;
+         Object.keys(fusionskin[fskin]).forEach((index)=>{
+         if(!count){
+             result+=`<div class="evo-row">`;
+         }
+         if(!count_all){
+             result+=`<p class="tituloevo">${fskin}</p>`;
+         }
+         result+=`
+         <div class="boxy_img" onclick="openbox_fusionskin(${id},'${fskin}',${index},0);">
+             
+             <img class="imgevo" src="${url_img}monsters/${id}/fusion_skin/${fskin}/${index}/${qualitys[qlty]}/0.webp" onerror="img_error(this);" alt="">
+             <span class="textevo">${fusionskin[fskin][index].name_skin}</span>
              
          </div>
          `;
