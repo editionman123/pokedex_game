@@ -384,11 +384,8 @@ function box_monsters_html(id,skin_name,skin_id,special,type){
     let monster=pokedex[id];
     if(type==="skin")skin_name=(monster[type][skin_name])?skin_name:monster.skin_start;
     
-    let skin_monster=monster[type][skin_name][skin_id];
-    let skin_default=monster[type][skin_name][0];
-    
-    let skin=skin_verify(skin_monster,skin_default);
-        
+    let mon_verify=verify_mon(monster,type,skin_name,skin_id);
+    //console.log(mon_verify);
     const btnNext=document.createElement("button");
     btnNext.setAttribute("class", "btn_next");
     btnNext.textContent = ">"; btnNext.onclick=function(){
@@ -402,8 +399,8 @@ function box_monsters_html(id,skin_name,skin_id,special,type){
     
     
     let header=box_head_html(id,skin_name,skin_id,special,type);
-    let stats=box_stats_html(skin.stats,skin.type_1,skin.type_2);
-    let evos=box_evos_html(id,skin_name,skin_id,skin.evo);
+    let stats=box_stats_html(mon_verify.skin.stats,mon_verify.skin.type_1,mon_verify.skin.type_2);
+    let evos=box_evos_html(id,skin_name,skin_id,mon_verify.skin.evo);
     let shapes=box_shapes_html(id,monster.skin);
     let specials=box_specials_html(id,skin_name,skin_id,type);
     let battleskin=box_battleskins_html(id,monster.battle_skin);
@@ -1005,15 +1002,16 @@ function img_error(e){
 }
 
 
-function skin_verify(skin,zero){
-    let result=skin;
-    //"battle_skin" va adentro de cada skin
-    //let notcopy=["evo","battle_evo"];
-    let notcopy=[];
+function verify_mon(mon,type,skin_name,skin_id){
+    let skins_to_default=["form"];
+    let mon_={};
+    let notcopy=[];//let notcopy=["evo","battle_evo"];
+    let zero=(skin_name.includes("form"))?mon[type]["default"][0]:mon[type][skin_name][0];
+    mon_.skin=mon[type][skin_name][skin_id];
     Object.keys(zero).forEach(e=>{
-        if(!result[e] && !notcopy.includes(e)){
-            result[e]=zero[e];
-        }
+        if(!mon_.skin[e] && !notcopy.includes(e)){
+            mon_.skin[e]=zero[e];
+        } 
     });
-    return result;
+    return mon_;
 }
