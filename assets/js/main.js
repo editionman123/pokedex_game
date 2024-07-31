@@ -260,7 +260,7 @@ function slot_html(){
 //skn-id
 function slot_monster_html(index,data){
     //let monster=pokedex[index];
-    let skin=data.skin[data.skin_start][0];
+    let skin=data.skin[data.skin_start.name][data.skin_start.id];
     let number_string=index.toString().padStart(4,"0");
 		let types_html=type_html(skin.type_1,skin.type_2);
 		let types_bg=type_bg(skin.type_1,skin.type_2);
@@ -269,7 +269,7 @@ function slot_monster_html(index,data){
 		
     slot.setAttribute("id", "pokemon");
     slot.onclick = function() {
-        openbox_skin(index,data.skin_start,0);
+        openbox_skin(index,data.skin_start.name,data.skin_start.id);
     }
     
     //principal$$$$$$$$
@@ -302,7 +302,7 @@ function slot_monster_html(index,data){
 		//test=data;
     const imgMonster = document.createElement("img");
     imgMonster.setAttribute("class", "imgmonster");
-    imgMonster.setAttribute("src", `${url_img}monsters/${index}/skin/${data.skin_start}/0/${qualitys[qlty]}/0.webp`);
+    imgMonster.setAttribute("src", `${url_img}monsters/${index}/skin/${data.skin_start.name}/${data.skin_start.id}/${qualitys[qlty]}/0.webp`);
     imgMonster.setAttribute("alt", "");
     /*imgMonster.loading="lazy";*/
     //console.log(imgMonster.src);
@@ -320,7 +320,7 @@ function slot_monster_html(index,data){
     //en slot3d########
     const img3d = document.createElement("img");
     img3d.setAttribute("class", "img3d");
-    img3d.setAttribute("src", `${url_img}monsters/${index}/skin/${data.skin_start}/0/${qualitys[qlty]}/0.webp`);
+    img3d.setAttribute("src", `${url_img}monsters/${index}/skin/${data.skin_start.name}/${data.skin_start.id}/${qualitys[qlty]}/0.webp`);
     img3d.setAttribute("alt", "");
     /*imgMonster.loading="lazy";*/
     img3d.onerror = function() {
@@ -382,7 +382,7 @@ function box3d_html(){
 
 function box_monsters_html(id,skin_name,skin_id,special,type){
     let monster=pokedex[id];
-    if(type==="skin")skin_name=(monster[type][skin_name])?skin_name:monster.skin_start;
+    if(type==="skin")skin_name=(monster[type][skin_name])?skin_name:monster.skin_start.name;
     
     let mon_verify=verify_mon(monster,type,skin_name,skin_id);
     //console.log(mon_verify);
@@ -1008,7 +1008,7 @@ function verify_mon(mon,type,skin_name,skin_id){
     let notcopy=[];//let notcopy=["evo","battle_evo"];
     let zero=mon[type][skin_name][0];
     if(!zero || !zero.stats){
-        zero=mon[type][mon.skin_start][0];
+        zero=mon[type][mon.skin_start.name][mon.skin_start.id];
     }
     mon_.skin=mon[type][skin_name][skin_id];
     Object.keys(zero).forEach(e=>{
