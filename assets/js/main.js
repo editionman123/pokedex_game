@@ -806,6 +806,7 @@ function func_special_html(id,skin,index,type){
     let fun="";
     if(type==="skin")fun="openbox_skin";
     else if(type==="battle_skin")fun="openbox_battleskin";
+    else if(type==="fusion_skin")fun="openbox_fusionskin";
     result+=`<div class="evo-row">`;
          result+=`
          <div onclick="${fun}(${id},'${skin}',${index},0);" class="boxy_img">
@@ -1008,7 +1009,7 @@ function verify_mon(mon,type,skin_name,skin_id){
     let skins_to_default=["form"];
     let mon_={};
     let notcopy=[];//let notcopy=["evo","battle_evo"];
-    let zero=mon[type][mon.skin_start.name][mon.skin_start.id];
+    let zero=mon[type][skin_name][skin_id];
     let max_properties = 0;
     let id_withdetails = null;
     for (const key in mon[type][skin_name]) {
