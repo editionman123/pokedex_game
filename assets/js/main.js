@@ -91,9 +91,8 @@ function connect_socket(host) {
 function socket_reciver(){
 	if(!socket)return;
 	socket.on("pokedex_id",(data)=>{
-	    let monster={};
 	    pokedex[data.id]=data.monster;
-	    openbox_skin(data.id,data.skin,data.index,0);
+	    openbox_skin(data.id,data.skin,data.index);
 	});
 	socket.on("pokedex",(data)=>{
 	    pokedex=Object.assign(pokedex,data.monsters);
@@ -126,10 +125,11 @@ select_generation.addEventListener('change', () => {
 })
 
 
-function openbox_skin(id,skin_name,skin_id,special=0){
+function openbox_skin(id,skin_name=null,skin_id=null,special=0){
     if(!action)return;//no se ejecuta
     //console.log(id,skin_name,skin_id);
     // 
+
     monster_list.innerHTML="";
     
     if(!pokedex[id]){//
@@ -137,6 +137,8 @@ function openbox_skin(id,skin_name,skin_id,special=0){
     }
     switcher_details("frame_pokedex",true);
     
+    if(!skin_name)skin_name=pokedex[id].skin_start.name;
+	if(!skin_id)skin_id=pokedex[id].skin_start.id;
     //let skin_name="start";//este debe venir desde la func
     //let skin_id=0;
     box_monsters_html(id,skin_name,skin_id,special,"skin");
@@ -383,18 +385,18 @@ function box3d_html(){
 function box_monsters_html(id,skin_name,skin_id,special,type){
     let monster=pokedex[id];
     if(type==="skin")skin_name=(monster[type][skin_name])?skin_name:monster.skin_start.name;
-    
     let mon_verify=verify_mon(monster,type,skin_name,skin_id);
     //console.log(mon_verify);
     const btnNext=document.createElement("button");
     btnNext.setAttribute("class", "btn_next");
+
     btnNext.textContent = ">"; btnNext.onclick=function(){
-        openbox_skin(parseInt(id)+1,"default",0);
+        openbox_skin(parseInt(id)+1);
     };
     const btnPrev=document.createElement("button");
     btnPrev.setAttribute("class", "btn_prev");
     btnPrev.textContent = "<"; btnPrev.onclick=function(){
-        openbox_skin(parseInt(id)-1,"default",0);
+        openbox_skin(parseInt(id)-1);
     };
     
     
@@ -731,7 +733,7 @@ function func_evo_html(id,skin,index,evos){
     			<polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="front"></polyline>
   		</svg>
             </div>
-            <div onclick="openbox_skin(${e.to},'${e.skin}',${e.index},0);" class="boxy_img">
+            <div onclick="openbox_skin(${e.to},'${e.skin}',${e.index});" class="boxy_img">
                 <img class="imgevo" src="${url_img}monsters/${e.to}/skin/${e.skin}/${e.index}/${qualitys[qlty]}/0.webp" onerror="img_error(this);" alt="">
             </div>
         </div>
@@ -776,7 +778,7 @@ function func_shape_html(id, shapes){
              result+=`<span class="tituloevo">${skin}</span>`;
          }
          result+=`
-         <div class="boxy_img" onclick="openbox_skin(${id},'${skin}',${index},0);">
+         <div class="boxy_img" onclick="openbox_skin(${id},'${skin}',${index});">
              
              <img class="imgevo" src="${url_img}monsters/${id}/skin/${skin}/${index}/${qualitys[qlty]}/0.webp" onerror="img_error(this);" alt="">
              <span class="textevo">${shapes[skin][index].name_skin}</span>
@@ -1006,10 +1008,21 @@ function verify_mon(mon,type,skin_name,skin_id){
     let skins_to_default=["form"];
     let mon_={};
     let notcopy=[];//let notcopy=["evo","battle_evo"];
-    let zero=mon[type][skin_name][0];
-    if(!zero || !zero.stats){
-        zero=mon[type][mon.skin_start.name][mon.skin_start.id];
+    let zero=mon[type][mon.skin_start.name][mon.skin_start.id];
+    let max_properties = 0;
+    let id_withdetails = null;
+    for (const key in mon[type][skin_name]) {
+        if (mon[type][skin_name].hasOwnProperty(key)) {
+            const currentObject = mon[type][skin_name][key];
+            const itemCount = Object.keys(currentObject).length;
+
+            if (itemCount > max_properties) {
+            max_properties = itemCount;
+            id_withdetails = key;
+            }
+        }
     }
+    if(!zero.stats)zero=mon[type][skin_name][id_withdetails];
     mon_.skin=mon[type][skin_name][skin_id];
     Object.keys(zero).forEach(e=>{
         if(!mon_.skin[e] && !notcopy.includes(e)){
