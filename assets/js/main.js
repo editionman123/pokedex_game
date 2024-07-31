@@ -1006,7 +1006,10 @@ function verify_mon(mon,type,skin_name,skin_id){
     let skins_to_default=["form"];
     let mon_={};
     let notcopy=[];//let notcopy=["evo","battle_evo"];
-    let zero=(skin_name.includes("form"))?mon[type]["default"][0]:mon[type][skin_name][0];
+    let zero=mon[type][skin_name][0];
+    if(!zero || !zero.stats){
+        zero=mon[type][mon.skin_start][0];
+    }
     mon_.skin=mon[type][skin_name][skin_id];
     Object.keys(zero).forEach(e=>{
         if(!mon_.skin[e] && !notcopy.includes(e)){
