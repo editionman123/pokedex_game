@@ -1024,6 +1024,7 @@ function verify_mon(mon,type,skin_name,skin_id){
         }
     }
     if(!zero.stats)zero=mon[type][skin_name][id_withdetails];
+    if(!zero.stats)zero=mon[type][mon.skin_start.name][mon.skin_start.id];
     mon_.skin=mon[type][skin_name][skin_id];
     Object.keys(zero).forEach(e=>{
         if(!mon_.skin[e] && !notcopy.includes(e)){
@@ -1032,3 +1033,27 @@ function verify_mon(mon,type,skin_name,skin_id){
     });
     return mon_;
 }
+
+
+
+/*ANIMACION DE DESPLAZAMIENTO DE  TEXTO ADM*/
+function updateAnimation() {
+    const textAdm = document.querySelector('.text_adm span');
+    const textWidth = textAdm.offsetWidth;
+    const containerWidth = document.querySelector('.text_adm').offsetWidth;
+    const totalWidth = textWidth + containerWidth;
+    const speed = 150; // Cambia este valor para ajustar la velocidad
+    const duration = totalWidth / speed;
+    textAdm.style.animation = `text_anim_left ${duration}s linear infinite, rainbow_text 5s linear infinite`;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const textAdm = document.querySelector('.text_adm span');
+    const observer = new MutationObserver(updateAnimation);
+    observer.observe(textAdm, {
+        childList: true,
+        characterData: true,
+        subtree: true
+    });
+    updateAnimation();
+});
